@@ -9,7 +9,11 @@
     ],
     "m_Keywords": [],
     "m_Dropdowns": [],
-    "m_CategoryData": [],
+    "m_CategoryData": [
+        {
+            "m_Id": "220fd102437544eb8e1faee7f6098842"
+        }
+    ],
     "m_Nodes": [
         {
             "m_Id": "378dc30ccf7b46118149813950ba2821"
@@ -178,7 +182,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -650.0,
-            "y": -185.0,
+            "y": -188.0,
             "width": 208.0,
             "height": 315.0
         }
@@ -213,10 +217,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -341.0,
-            "y": -6.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": -191.00001525878907,
+            "y": -223.99998474121095,
+            "width": 110.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -305,12 +309,24 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 10.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "220fd102437544eb8e1faee7f6098842",
+    "m_Name": "",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "1d5e3df8cebb49ceaee8ca864a4fe848"
+        }
+    ]
 }
 
 {
@@ -419,10 +435,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 746.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": 730.0000610351563,
+            "y": -191.0,
+            "width": 121.0,
+            "height": 76.99999237060547
         }
     },
     "m_Slots": [
@@ -605,8 +621,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -425.0,
-            "y": -185.0,
+            "x": -418.0,
+            "y": -186.0,
             "width": 208.0,
             "height": 278.0
         }
