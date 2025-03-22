@@ -39,27 +39,27 @@ Material:
     m_TexEnvs:
     - _A_Albedo:
         m_Texture: {fileID: 2800000, guid: 539fc7324fe7f06428615a2164c3cf1b, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _A_Mask:
         m_Texture: {fileID: 2800000, guid: 1108a5d0b8337de45bbc10c8e93a297f, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _A_Normal:
         m_Texture: {fileID: 2800000, guid: b32994eb734cd914aa2276e4d7550afe, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _B_Albedo:
         m_Texture: {fileID: 2800000, guid: b432b0ffa56f4ac4c96a77574639ae8d, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _B_Mask:
         m_Texture: {fileID: 2800000, guid: 48138f67e3472c746bfe9df12a979333, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _B_Normal:
         m_Texture: {fileID: 2800000, guid: 6828af5921923494c80c4aecc9de2752, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
@@ -75,14 +75,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _A_NormalStrength: 1
+    - _A_NormalStrength: 0.99
     - _B_NormalStrength: 1
-    - _NoiseScale: 0
-    - _NoiseStrength: 0
+    - _NoiseScale: 86
+    - _NoiseStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Softness: 0
     m_Colors:
-    - _A_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _B_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _A_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _B_Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
