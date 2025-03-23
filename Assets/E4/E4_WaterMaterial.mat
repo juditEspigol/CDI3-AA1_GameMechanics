@@ -13,7 +13,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _DEBUG_VORONOI
+  - _DEBUG_DISABLED
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -43,7 +43,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DEBUG: 1
+    - _DEBUG: 0
     - _Depth_Range: 10
     - _Distortion_Amount: 0.15
     - _Foam_CoastDepth: 10
