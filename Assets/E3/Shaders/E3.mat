@@ -72,8 +72,8 @@ Material:
     - _SnowMax: 0.3
     - _SnowMetallic: 0
     - _SnowMin: 0.29
-    - _SnowNormalScale: 100
-    - _SnowNormalStrength: 0.25
+    - _SnowNormalScale: 99.1
+    - _SnowNormalStrength: 4.26
     - _SnowSmoothness: 0.241
     - _SnowSoftness: 0
     - _SnowStart: -0.04
