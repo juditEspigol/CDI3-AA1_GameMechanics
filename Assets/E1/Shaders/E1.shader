@@ -155,7 +155,7 @@ Shader "AA2/E1"
                 // Calculate blend
                 float scanlines = Scanlines(screenSpaceUV, _Scanline_Density, _Scanline_Speed); 
 
-                col.a = BlendSoftLight(fresnel + intersection ,  hexagons,1);
+                col.a = BlendSoftLight(fresnel + intersection ,  scanlines * hexagons, 1);
                 
                 col.xyz = _Color.xyz;
 
