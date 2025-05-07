@@ -4,13 +4,15 @@ Shader "AA2/E1"
     {
         _MainTex ("Texture", 2D) = "white" {}
 
-        _Color ("Color", Color) = (0,1,0,1)
+       [HDR] _Color ("Color", Color) = (0,1,0,1)
         _Texture_Speed ("Texture Speed", Float) = 1
         _Scanline_Speed ("Scanline Speed", Float) = -0.1
         _Texture_Tiling ("Texture Tiling", Vector) = (16,20,0,0)
         _Scanline_Density ("Scanline Density", Float) = 50
         _Fresnel_Power ("Fresnel Power", Float) = 5
         _Depth_Blend ("Depth Blend", Float) = 0.5
+        _Scale ("Scale", Float) = 0.5
+
     }
     SubShader
     {
@@ -36,6 +38,7 @@ Shader "AA2/E1"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;
             };
 
             struct v2f
@@ -43,8 +46,8 @@ Shader "AA2/E1"
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
                 float4 screenSpace : TEXCOORD1;
-                float3 normal : NORMAL;
-                float3 normalWorld : TEXCOORD3;
+                float3 normal : TEXCOORD2;
+                float3 viewDir : TEXCOORD3;
             };
 
             // Repetir variables
@@ -59,6 +62,7 @@ Shader "AA2/E1"
             float _Scanline_Density;
             float _Fresnel_Power;
             float _Depth_Blend;
+            float _Scale;
 
             // PRIVATE
             sampler2D _CameraDepthTexture; // Necesario para samplear profundidad
@@ -71,7 +75,9 @@ Shader "AA2/E1"
 
                 // Equivalente a la screen position raw
                 o.screenSpace = ComputeScreenPos(o.vertex);
-                o.normalWorld = UnityObjectToWorldNormal(float3(0, 0, 1));
+
+                o.normal = UnityObjectToWorldNormal(v.normal);
+                o.viewDir = normalize(WorldSpaceViewDir(v.vertex));
 
                 return o;
             }
@@ -103,10 +109,7 @@ Shader "AA2/E1"
 
             float Fresnel(v2f _i, float _fresnel_power)
             {
-                float3 normal = normalize(_i.normalWorld);
-                float3 viewDir = normalize(_WorldSpaceCameraPos - mul(unity_ObjectToWorld, float4(0,0,0,1)).xyz);
-
-                return pow((1.0 - saturate(dot(normalize(normal), normalize(viewDir)))), _fresnel_power);
+               return pow((1.0 - saturate(dot(normalize(_i.normal), _i.viewDir))), _fresnel_power);
             }
 
             float BlendSoftLight(float _base, float _blend, float _opacity)
@@ -119,6 +122,20 @@ Shader "AA2/E1"
             
                 return lerp(_base, finalResult, _opacity);
             }
+
+            float Hexagons(v2f _i)
+            {
+              float2 velocity = float2(0.0f, _Time.y * _Texture_Speed);
+              float2 TilingAndOffset = _i.uv * _Texture_Tiling + velocity;
+
+              float y = TilingAndOffset.y + (0.5f * fmod(floor(TilingAndOffset.x * 1.5f), 2));
+
+              float2 result1 = float2(TilingAndOffset.x * 1.5f, y);
+
+              float2 result2 = abs((fmod(result1, float2(1,1)) - float2(0.5f, 0.5f)));
+
+              return 1 - saturate(smoothstep(0,0.5f,abs(max(((result2.x * 1.5f) + result2.y), result2.y * 2) - _Scale) * 2));
+            }
             //// END FUNCTIONS ////
             
             fixed4 frag (v2f i) : SV_Target // fragment shader
@@ -127,20 +144,22 @@ Shader "AA2/E1"
                 fixed4 col = tex2D(_MainTex, i.uv);
 
                 float2 screenSpaceUV = i.screenSpace.xy / i.screenSpace.w;
-                float depth = Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, screenSpaceUV));
+                float depth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, screenSpaceUV));
 
                 // Calculate base
                 float intersection = Intersection(i, depth, _Depth_Blend);
                 float fresnel = Fresnel(i, _Fresnel_Power);
                 float base = intersection + fresnel;
+                float hexagons = Hexagons(i);
 
                 // Calculate blend
                 float scanlines = Scanlines(screenSpaceUV, _Scanline_Density, _Scanline_Speed); 
-                float blend = 0.f;
 
-                col.a = fresnel;
+                col.a = BlendSoftLight(fresnel + intersection ,  hexagons,1);
+                
+                col.xyz = _Color.xyz;
 
-                return col;
+                return col ;
             }
             ENDCG
         }
