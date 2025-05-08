@@ -4,7 +4,7 @@ Shader "AA2/E1"
     {
         _MainTex ("Texture", 2D) = "white" {}
 
-       [HDR] _Color ("Color", Color) = (0,1,0,1)
+        [HDR] _Color ("Color", Color) = (0,1,0,1)
         _Texture_Speed ("Texture Speed", Float) = 1
         _Scanline_Speed ("Scanline Speed", Float) = -0.1
         _Texture_Tiling ("Texture Tiling", Vector) = (16,20,0,0)
